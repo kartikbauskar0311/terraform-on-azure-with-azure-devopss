@@ -1,0 +1,34 @@
+
+trigger:
+- main
+
+stages:
+# Build Stage
+  - stage:
+    displayName: Build stage 
+    jobs:
+      - job: 
+        displayName: Build job 
+        pool:
+          vmImage: 'ubuntu-latest' 
+        steps:
+          - bash: echo content in System Default Working Directory; $(System.DefaultWorkingDirectory)
+          - bash: echo Before copying contents in Build Artifact Staging Directory; 
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: '$(System.DefaultWorkingDirectory)/tm'
+              Contents: '**'
+              TargetFolder: '$(Build.ArtifactStagingDirectory)'
+          
+          - bash: echo after copying to Build Artifact Staging Directory; $(Build.ArtifactStagingDirectory)
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'tm1'
+              publishLocation: 'Container'
+            
+
+
+
+
+
