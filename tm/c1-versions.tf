@@ -27,4 +27,5 @@ provider "azurerm" {
   subscription_id = "599ea008-5630-47a0-be71-a4858903a2b1"
 }
 
-# Simple Comment
+# Simple Comment 
+# QA, Stage and Prod env added
